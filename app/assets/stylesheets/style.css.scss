@@ -370,7 +370,7 @@ h6 {
 /* Header Section
 =================================================================== */
 .navbar {
-	margin-bottom: 40px;
+	margin-bottom: 0px;
 }
 .navbar-inner {
 	margin-bottom: 0px;
@@ -2874,6 +2874,11 @@ footer {
 	-webkit-border-radius: 0px;
 	   -moz-border-radius: 0px;
 	      	border-radius: 0px;
+ position: fixed;
+ bottom: 0;
+ width: 100%;
+ margin: 0px 0px 0px 0px;
+
 }
 
 /* Sparkline stats
