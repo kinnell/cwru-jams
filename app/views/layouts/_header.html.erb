@@ -247,6 +247,17 @@
 
                     -->
                         <!-- start: User Dropdown -->
+
+                            <% if user_signed_in? %>
+                                <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+                                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                            <% else %>
+                                <li><%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-large" %></li>
+                                <li><%= link_to "Register", new_user_registration_path, class: "btn btn-primary btn-large" %></li>
+                            <% end %>
+                        
+                        
+
                         <li class="dropdown">
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="halflings-icon white user"></i> EBME 380 Test User

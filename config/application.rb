@@ -64,6 +64,9 @@ module Jams
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.precompile += %w( .svg .eot .woff .ttf )
 
+    # Required for Devise on Heroku
+    config.assets.initialize_on_precompile = false
+
 
   end
 end
