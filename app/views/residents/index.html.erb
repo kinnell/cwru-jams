@@ -1,0 +1,30 @@
+<h1>Residents</h1>
+<br>
+
+  <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
+      <thead>
+        <tr>
+            <th>Resident Name</th><th>Status</th><th>Toolbox</th>
+        </tr>
+      </thead>   
+      <tbody>
+        <% @residents.each do |resident| %>
+            <tr>
+              <td><%= resident.name %></td>
+              <td class="center"><span class="label label-success">Active</span></td>
+              <td><%= link_to 'Show', resident %>
+                  <%= link_to 'Edit', edit_resident_path(resident) %>
+                  <%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
+            </tr>
+        <% end %>
+                                   
+      </tbody>
+  </table>
+
+<br />
+
+<%= link_to 'New Resident', new_resident_path %>
+
+             
+
