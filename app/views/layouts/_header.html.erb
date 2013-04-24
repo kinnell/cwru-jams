@@ -249,8 +249,19 @@
                         <!-- start: User Dropdown -->
 
                             <% if user_signed_in? %>
-                                <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-                                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                                <li class="dropdown">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="halflings-icon white user"></i> EBME 380 Test User
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class="halflings-icon white cog"></i> Settings</a></li>
+                                        <li><a href="login.html"><i class="halflings-icon white off"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary btn-large" %></li>
+                                <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-large" %></li>
                             <% else %>
                                 <li><%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-large" %></li>
                                 <li><%= link_to "Register", new_user_registration_path, class: "btn btn-primary btn-large" %></li>
@@ -258,16 +269,7 @@
                         
                         
 
-                        <li class="dropdown">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="halflings-icon white user"></i> EBME 380 Test User
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="halflings-icon white cog"></i> Settings</a></li>
-                                <li><a href="login.html"><i class="halflings-icon white off"></i> Logout</a></li>
-                            </ul>
-                        </li>
+                        
                         <!-- end: User Dropdown -->
                     </ul>
                 </div>
