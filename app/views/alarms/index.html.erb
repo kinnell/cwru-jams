@@ -1,0 +1,30 @@
+<h1>Alarms</h1>
+<br>
+
+  <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
+      <thead>
+        <tr>
+            <th>Alarm ID</th><th>Status</th><th>Toolbox</th>
+        </tr>
+      </thead>   
+      <tbody>
+        <% @alarms.each do |alarm| %>
+            <tr>
+              <td><%= alarm.id %></td> 
+              <td class="center"><span class="label label-success">Active</span></td>
+              <td><%= link_to 'Show', alarm %>
+                  <%= link_to 'Edit', edit_alarm_path(alarm) %>
+                  <%= link_to 'Destroy', alarm, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
+            </tr>
+        <% end %>
+                                   
+      </tbody>
+  </table>
+
+<br />
+
+<%= link_to 'New Alarm', new_alarm_path %>
+
+             
+

@@ -1,5 +1,8 @@
 Jams::Application.routes.draw do
 
+  resources :alarms
+
+
   resources :devices
 
 
