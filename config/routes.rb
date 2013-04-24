@@ -1,5 +1,8 @@
 Jams::Application.routes.draw do
 
+  resources :devices
+
+
   resources :residents
 
 
@@ -10,7 +13,6 @@ Jams::Application.routes.draw do
   get 'alarms' => 'pages#alarms'
   get 'calendar' => 'pages#calendar'
   get 'data' => 'pages#data'
-  get 'devices' => 'pages#devices'
   get 'preferences' => 'pages#preferences'
 
 end

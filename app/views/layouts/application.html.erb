@@ -11,18 +11,20 @@
 
     <%= render 'layouts/menu' %>
 
+
+
     <div class="container">
             <% flash.each do |name, msg| %>
                 <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
             <% end %>
 
+            <div style="padding: 0px 0px 0px 20px;">
+                <%= yield %>
+            </div>
 
+    </div>
 
-<div style="padding: 0px 0px 0px 20px;">
-    <%= yield %>
-</div>
-
-</div>
+    
 
     <%= render 'layouts/footer' %>
 
