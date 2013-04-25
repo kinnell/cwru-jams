@@ -1,8 +1,8 @@
 <%= simple_form_for(@alarm) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-  </div>
+  <%= f.input :resident_id, as: :select, :collection => Resident.all %>
+
 
   <div class="form-actions">
     <%= f.button :submit %>
