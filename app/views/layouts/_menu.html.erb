@@ -1,44 +1,39 @@
-
-
-
 <div id="sidebar-left" class="span1">
 	<div class="nav-collapse sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked main-menu">
 
 			<% if user_signed_in? %>
 			
-			<li class="active">
+			<%= link_to(root_path) do %><li style="padding: 10px 0px 10px 0px;">
 				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black home"></i></div><span class="hidden-tablet">
-				<%=link_to "Dashboard", root_path %></span>
-			</li>	
+				Dashboard</span>
+			</li><% end %>	
 			
-			<li>
-				
+			<%= link_to(residents_path) do %><li style="padding: 10px 0px 10px 0px;">
 				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black user"></i></div><span class="hidden-tablet">
-				<%=link_to "Residents", residents_path %></span>
-				
-			</li>
+				Residents</span>
+			</li><% end %>
 			
-			<li>
-				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black bell"></i></div><span class="hidden-tablet"> <%=link_to "Alarms", alarms_path %></span>
-				
-			</li>
+			<%= link_to(alarms_path) do %><li style="padding: 10px 0px 10px 0px;">
+				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black bell"></i></div><span class="hidden-tablet">
+				Alarms</span>
+			</li><% end %>
 			
-			<li>
-				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black hdd"></i></div><span class="hidden-tablet"> <%=link_to "Devices", devices_path %></span>
-				
-			</li>
+			<%= link_to(devices_path) do %><li style="padding: 10px 0px 10px 0px;">
+				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black hdd"></i></div><span class="hidden-tablet">
+				Devices</span>
+			</li><% end %>
 			
 			
-			<li>
-				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black tasks"></i></div><span class="hidden-tablet"> <%=link_to "Data", data_path %></span>
-				
-			</li>
+			<%= link_to(data_path) do %><li style="padding: 10px 0px 10px 0px;">
+				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black tasks"></i></div><span class="hidden-tablet">
+				Data</span>
+			</li><% end %>
 
-			<li>
-				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black cog"></i></div><span class="hidden-tablet"> <%=link_to "Preferences", preferences_path %></span>
-				
-			</li>
+			<%= link_to(preferences_path) do %><li style="padding: 10px 0px 10px 0px;">
+				<div style="height=16px;width:16px;margin-left:37px;"><i class="halflings-icon black cog"></i></div><span class="hidden-tablet">
+				Preferences</span>
+			</li><% end %>
 
 			<% end %>
 
