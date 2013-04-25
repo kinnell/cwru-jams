@@ -1,20 +1,21 @@
 <h1>Residents</h1>
 <br>
 
+
   <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
       <thead>
         <tr>
-            <th>Resident Name</th><th>Status</th><th>Toolbox</th>
+            <th>Resident Name</th><th><center>Resident Status</center></th><th><center>Options</center></th>
         </tr>
       </thead>   
       <tbody>
         <% @residents.each do |resident| %>
             <tr>
-              <td><%= resident.name %></td>
-              <td class="center"><span class="label label-success">Active</span></td>
-              <td><%= link_to 'Show', resident %>
-                  <%= link_to 'Edit', edit_resident_path(resident) %>
-                  <%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <td><%= link_to resident.name, resident %></td>
+              <td style="text-align: center;"><span class="label label-success">Active</span></td>
+              <td style="text-align: center;">
+                  <%= link_to(edit_resident_path(resident)) do %><i class="halflings-icon black pencil"></i><% end %>
+                  <%= link_to(resident, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
               </td>
             </tr>
         <% end %>
@@ -24,7 +25,10 @@
 
 <br />
 
-<%= link_to 'New Resident', new_resident_path %>
+<%= link_to 'New Resident', new_resident_path, class: "btn btn-primary" %>
+
+
+
 
              
 

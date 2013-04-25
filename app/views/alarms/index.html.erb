@@ -4,19 +4,18 @@
   <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
       <thead>
         <tr>
-            <th>Alarm ID</th><th>Resident Name</th><th>Status</th><th>Toolbox</th>
+            <th>Alarm ID</th><th>Resident Name</th><th><center>Device Status</center></th><th><center>Options</center></th>
         </tr>
       </thead>   
       <tbody>
         <% @alarms.each do |alarm| %>
             <tr>
-              <td><%= alarm.id %></td>
+              <td><%= link_to alarm.id, alarm %></td>
               <td><%= Resident.find(alarm.resident_id).name %></td>
-              <td class="center"><span class="label label-success">Active</span></td>
-              <td><%= link_to 'Show', alarm %>
-                  <%= link_to 'Edit', edit_alarm_path(alarm) %>
-                  <%= link_to 'Destroy', alarm, method: :delete, data: { confirm: 'Are you sure?' } %>
-              </td>
+               <td style="text-align: center;"><span class="label label-success">Active</span></td>
+               <td style="text-align: center;">
+                  <%= link_to(edit_alarm_path(alarm)) do %><i class="halflings-icon black pencil"></i><% end %>
+                  <%= link_to(alarm, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
             </tr>
         <% end %>
                                    
@@ -25,7 +24,7 @@
 
 <br />
 
-<%= link_to 'New Alarm', new_alarm_path %>
+<%= link_to 'New Alarm', new_alarm_path, class: "btn btn-primary" %>
 
              
 

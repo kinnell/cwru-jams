@@ -4,18 +4,17 @@
   <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
       <thead>
         <tr>
-            <th>Device ID</th><th>Status</th><th>Toolbox</th>
+            <th>Device ID</th><th><center>Device Status</center></th><th><center>Options</center></th>
         </tr>
       </thead>   
       <tbody>
         <% @devices.each do |device| %>
             <tr>
-              <td><%= device.id %></td> 
-              <td class="center"><span class="label label-success">Active</span></td>
-              <td><%= link_to 'Show', device %>
-                  <%= link_to 'Edit', edit_device_path(device) %>
-                  <%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %>
-              </td>
+               <td><%= link_to device.id, device %></td>
+               <td style="text-align: center;"><span class="label label-success">Active</span></td>
+               <td style="text-align: center;">
+                  <%= link_to(edit_device_path(device)) do %><i class="halflings-icon black pencil"></i><% end %>
+                  <%= link_to(device, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
             </tr>
         <% end %>
                                    
@@ -24,7 +23,7 @@
 
 <br />
 
-<%= link_to 'New Device', new_device_path %>
+<%= link_to 'New Device', new_device_path, class: "btn btn-primary" %>
 
              
 
