@@ -11,17 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425200046) do
+ActiveRecord::Schema.define(:version => 20130427134329) do
 
   create_table "alarms", :force => true do |t|
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "resident_id"
+    t.boolean  "status"
   end
 
   add_index "alarms", ["resident_id"], :name => "index_alarms_on_resident_id"
 
   create_table "devices", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "facilities", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -12,7 +12,13 @@
             <tr>
               <td><%= link_to alarm.id, alarm %></td>
               <td><%= Resident.find(alarm.resident_id).name %></td>
-               <td style="text-align: center;"><span class="label label-success">Active</span></td>
+               <td style="text-align: center;">
+                  <% if alarm.status==true %>
+                      <span class="label label-success">Online</span>
+                  <% elsif alarm.status==false %>
+                      <span class="label label-offline">Offline</span
+                  <% end %>  
+              </td>
                <td style="text-align: center;">
                   <%= link_to(edit_alarm_path(alarm)) do %><i class="halflings-icon black pencil"></i><% end %>
                   <%= link_to(alarm, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>

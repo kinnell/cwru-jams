@@ -1124,6 +1124,30 @@ ul.messages li .message {
 	background-image: linear-gradient(top, 	hsl(101, 54%, 71%), hsl(101, 55%, 56%));
 }
 
+.label-offline,
+.badge-offline {
+  	border-color: #969696;
+	background-color: #9c9c9c;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, hsl(11, 0%, 76%)), color-stop(100%, hsl(11, 0%, 61%)));
+	background-image: -webkit-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: -moz-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: -ms-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: -o-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+}
+
+.label-offline[href],
+.badge-offline[href] {
+  	border-color: #969696;
+	background-color: #9c9c9c;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, hsl(11, 0%, 76%)), color-stop(100%, hsl(11, 0%, 61%)));
+	background-image: -webkit-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: -moz-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: -ms-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: -o-linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+	background-image: linear-gradient(top, hsl(11, 0%, 76%), hsl(11, 0%, 61%));
+}
+
 .label-info,
 .badge-info {
   	border-color: #2FABE9;

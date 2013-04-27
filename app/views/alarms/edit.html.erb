@@ -1,6 +1,17 @@
 <h1>Editing alarm</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@alarm) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :resident_id, as: :select, :collection => Resident.all %>
+  <%= f.input :status, as: :boolean, :label => "Activate?" %>
+
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', @alarm %> |
 <%= link_to 'Back', alarms_path %>

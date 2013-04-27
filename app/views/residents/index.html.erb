@@ -25,7 +25,9 @@
 
 <br />
 
-<%= link_to 'New Resident', new_resident_path, class: "btn btn-primary" %>
+<%= link_to (new_resident_path), class: "btn btn-primary" do %>
+New Resident
+<% end %>
 
 
 
