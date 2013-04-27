@@ -1,6 +1,6 @@
 <h1>New resident</h1>
 
-<%= simple_form_for(@resident, html: { class: "form-horizontal"}) do |f| %>
+<%= simple_form_for(@resident, html: { }) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name, as: :text, input_html: { rows: "1" } %>

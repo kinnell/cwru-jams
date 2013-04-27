@@ -1,10 +1,12 @@
 <h1>Editing resident</h1>
 
-<%= simple_form_for(@resident, html: { class: "form-horizontal"}) do |f| %>
+<%= simple_form_for(@resident, html: { }) do |f| %>
   <%= f.error_notification %>
 
+<div class="form-inputs">
   <%= f.input :name, as: :text, input_html: { rows: "1" } %>
   <%= f.input :status, as: :boolean, :label => "Activate?" %>
+</div>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn btn-primary" %>
