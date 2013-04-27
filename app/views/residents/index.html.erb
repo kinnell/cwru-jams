@@ -12,7 +12,14 @@
         <% @residents.each do |resident| %>
             <tr>
               <td><%= link_to resident.name, resident %></td>
-              <td style="text-align: center;"><span class="label label-success">Active</span></td>
+              <td style="text-align: center;">
+                  <% if resident.status==true %>
+                      <span class="label label-success">Online</span>
+                  <% elsif resident.status==false %>
+                      <span class="label label-offline">Offline</span
+                  <% end %>  
+
+              </td>
               <td style="text-align: center;">
                   <%= link_to(edit_resident_path(resident)) do %><i class="halflings-icon black pencil"></i><% end %>
                   <%= link_to(resident, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>

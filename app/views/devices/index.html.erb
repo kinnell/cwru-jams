@@ -11,7 +11,16 @@
         <% @devices.each do |device| %>
             <tr>
                <td><%= link_to device.id, device %></td>
-               <td style="text-align: center;"><span class="label label-success">Active</span></td>
+               <td style="text-align: center;">
+                  <% if device.status==true %>
+                      <span class="label label-success">Online</span>
+                  <% elsif device.status==false %>
+                      <span class="label label-offline">Offline</span
+                  <% end %>     
+
+
+
+               </td>
                <td style="text-align: center;">
                   <%= link_to(edit_device_path(device)) do %><i class="halflings-icon black pencil"></i><% end %>
                   <%= link_to(device, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>

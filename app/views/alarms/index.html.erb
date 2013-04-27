@@ -20,6 +20,7 @@
                   <% end %>  
               </td>
                <td style="text-align: center;">
+                  <%= link_to(alarm) do %><i class="halflings-icon black ok"></i><% end %>
                   <%= link_to(edit_alarm_path(alarm)) do %><i class="halflings-icon black pencil"></i><% end %>
                   <%= link_to(alarm, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
             </tr>

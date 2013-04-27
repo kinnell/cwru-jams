@@ -1,6 +1,17 @@
 <h1>Editing device</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@device) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	  <%= f.input :status, as: :boolean, :label => "Activate?" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', @device %> |
 <%= link_to 'Back', devices_path %>
