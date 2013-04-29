@@ -11,13 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429013356) do
+ActiveRecord::Schema.define(:version => 20130429213011) do
 
   create_table "alarms", :force => true do |t|
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "resident_id"
     t.boolean  "status"
+    t.string   "medication"
+    t.string   "priority"
+    t.datetime "time"
+    t.string   "recurring"
   end
 
   add_index "alarms", ["resident_id"], :name => "index_alarms_on_resident_id"
