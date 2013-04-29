@@ -4,13 +4,24 @@
   <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
       <thead>
         <tr>
-            <th>Device ID</th><th><center>Device Status</center></th><th><center>Options</center></th>
+            <th>Device ID</th>
+            <th>Resident</th>
+            <th><center>Device Status</center></th>
+            <th><center>Options</center></th>
         </tr>
       </thead>   
       <tbody>
         <% @devices.each do |device| %>
             <tr>
                <td><%= link_to device.id, device %></td>
+               <td>
+                  <% if device.resident_id %>
+                      <% if Resident.exists?(device.resident_id) %>
+                          <%= Resident.find(device.resident_id).name %>
+                      <% end %>
+                  <% end %>
+
+               </td>
                <td style="text-align: center;">
                   <% if device.status==true %>
                       <span class="label label-success">Online</span>

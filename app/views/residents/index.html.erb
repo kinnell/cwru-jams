@@ -5,13 +5,17 @@
   <table class="table table-bordered table-striped table-condensed" style="width:50%;left:20px;">
       <thead>
         <tr>
-            <th>Resident Name</th><th><center>Resident Status</center></th><th><center>Options</center></th>
+            <th>Resident Name</th>
+            <th><center>Room</center></th>  
+            <th><center>Resident Status</center></th>                
+            <th><center>Options</center></th>
         </tr>
       </thead>   
       <tbody>
         <% @residents.each do |resident| %>
             <tr>
               <td><%= link_to resident.name, resident %></td>
+              <td><center><%= resident.room %></center></td>
               <td style="text-align: center;">
                   <% if resident.status==true %>
                       <span class="label label-success">Online</span>
@@ -22,7 +26,7 @@
               </td>
               <td style="text-align: center;">
                   <%= link_to(edit_resident_path(resident)) do %><i class="halflings-icon black pencil"></i><% end %>
-                  <%= link_to(resident, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
+                  <%= link_to(resident, method: :delete, data: { confirm: 'Are you sure? Deleting a Resident will delete their alarms as well!' }) do %><i class="halflings-icon black trash"></i><% end %>
               </td>
             </tr>
         <% end %>

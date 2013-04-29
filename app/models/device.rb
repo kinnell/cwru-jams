@@ -1,4 +1,5 @@
 class Device < ActiveRecord::Base
-  attr_accessible :status
+  attr_accessible :resident_id, :status
+
 
 end

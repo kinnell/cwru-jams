@@ -3,5 +3,7 @@ class Alarm < ActiveRecord::Base
 
   validates :resident_id, presence: true
 
+  belongs_to :resident
+
 
 end
