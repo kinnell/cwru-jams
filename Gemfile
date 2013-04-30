@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'jquery-rails', '~> 1.0.12'
+gem 'jquery-rails', '>= 1.0.12'
 gem 'devise'
 gem 'simple_form'
 
 group :production do
-  gem 'pg'
+	gem 'pg'
 end
 
 group :development, :test do
-  gem 'sqlite3'
+	gem 'sqlite3'
 end
 
 group :assets do
@@ -19,5 +19,3 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.3.1.0'
 end
-
-
