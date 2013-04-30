@@ -21,15 +21,26 @@
                                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                         <i class="halflings-icon white user"></i> 
                                         <%= current_user.name %>
+                                        <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="halflings-icon white cog"></i> Settings</a></li>
-                                        <li><a href="login.html"><i class="halflings-icon white off"></i> Logout</a></li>
+                                        
+                                        <li>
+                                            <%= link_to(edit_user_registration_path) do %>
+                                                <i class='halflings-icon white cog'></i> Settings
+                                            <% end %>
+                                        </li>
+                                
+                                        <li>
+                                            <%= link_to(destroy_user_session_path, method: :delete) do %>
+                                                <i class='halflings-icon white off'></i> Logout
+                                            <% end %>
+                                        </li>
+
                                     </ul>
                                 </li>
 
-                                <li><%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary btn-large" %></li>
-                                <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-large" %></li>
+
                             <% else %>
                                 <li><%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-large" %></li>
                                 <li><%= link_to "Register", new_user_registration_path, class: "btn btn-primary btn-large" %></li>

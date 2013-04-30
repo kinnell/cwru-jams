@@ -25,7 +25,9 @@
       </thead>   
       <tbody>
 
-      	<% Alarm.where("resident_id = ?", params[:resident_id]) do |alarm| %>
+      	<% Alarm.find_each do |alarm| %>
+
+      		<% if @resident.id==alarm.resident_id %>
             <tr>
 
               <td><%= link_to alarm.id, alarm %></td>
@@ -54,6 +56,7 @@
                   <%= link_to(alarm, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
               
             </tr>
+            <% end %>
         <% end %>
         
                                    

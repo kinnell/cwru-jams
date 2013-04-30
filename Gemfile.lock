@@ -122,7 +122,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.1.0)
   coffee-rails (~> 3.2.1)
   devise
-  jquery-rails
+  jquery-rails (>= 1.0.12)
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
