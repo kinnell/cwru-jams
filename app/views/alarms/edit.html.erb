@@ -1,19 +1,20 @@
 <h1>Editing alarm</h1>
 
-<%= simple_form_for(@alarm) do |f| %>
+<%= simple_form_for(@alarm, html: {class: 'form-horizontal'}) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-  <%= f.input :medication %>
-  <%= f.input :resident_id, as: :select, :collection => Resident.all %>
-  <%= f.input :status, as: :boolean, :label => "Activate?" %>
+  <div class="form-actions">
+  	  <%= f.input :id, disabled: true, :label => "Alarm ID" %>
+ 	 <%= f.input :medication %>
+ 	 <%= f.input :resident_id, as: :select, :collection => Resident.all %>
+ 	 <%= f.input :time, as: :time, :minute_step => 15, :ampm => true %>
+ 	 <%= f.input :recurring, as: :radio_buttons, collection: ["Daily"] %>
+ 	 <%= f.input :priority, as: :radio_buttons, collection: ["Normal", "High"], :selected => "Normal" %>
+  	 <%= f.input :status, as: :boolean, :label => "Activate?" %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+  	<%= link_to 'Back', alarms_path, class: "btn" %>
+    <%= f.button :submit, class: "btn btn-success" %>
   </div>
-<% end %>
-
-
-<%= link_to 'Show', @alarm %> |
-<%= link_to 'Back', alarms_path %>
+  <% end %>

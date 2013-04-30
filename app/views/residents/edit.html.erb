@@ -1,18 +1,17 @@
 <h1>Editing resident</h1>
 
-<%= simple_form_for(@resident, html: { }) do |f| %>
+<%= simple_form_for(@resident, html: {class: 'form-horizontal'}) do |f| %>
   <%= f.error_notification %>
 
-<div class="form-inputs">
-  <%= f.input :name %>
-  <%= f.input :room %>
+<div class="form-actions">
+  <%= f.input :id, disabled: true, :label => "Resident ID" %>
+  <%= f.input :name, :label => "Resident Name" %>
+  <%= f.input :room, :label => "Room Number" %>
   <%= f.input :status, as: :boolean, :label => "Activate?" %>
 </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
+  	<%= link_to 'Back', residents_path, class: "btn" %>
+    <%= f.button :submit, class: "btn btn-success" %>
   </div>
 <% end %>
-
-<%= link_to 'Show', @resident %> |
-<%= link_to 'Back', residents_path %>

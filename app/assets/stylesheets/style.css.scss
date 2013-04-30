@@ -130,7 +130,7 @@ h6 {
        -moz-border-radius: 0px 5px 5px 5px;
           	border-radius: 0px 5px 5px 5px;
 
-          	
+
 	position: relative;
 }
 
@@ -564,7 +564,7 @@ a.brand span {
 
 .nav-tabs.nav-stacked  > li.active > a {
 	margin: 1px 0px 0px 0px;
-  	border: 2px solid #eee;
+  	border: 0px solid #eee;
 	border-right: none;
   	color: #3b3b41;
   	background: #fff;
@@ -578,7 +578,7 @@ a.brand span {
 
 .nav-tabs.nav-stacked  > li.active > ul {
 	margin:-4px 0px 0px 0px;
-  	border: 2px solid #eee;
+  	border: 0px solid #eee;
 	padding: 5px 0px;
 	border-top: none;
 	border-right: none;
