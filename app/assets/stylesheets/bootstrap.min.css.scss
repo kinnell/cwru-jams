@@ -573,7 +573,9 @@
  .container {
  	margin-right:auto;
  	margin-left:auto;
- 	*zoom:1
+ 	padding: 10px 0px 0px 20px;
+ 	*zoom:1;
+
 }
 	
  .container:before,.container:after {
@@ -3564,7 +3566,7 @@
 	
  .nav-stacked>li {
  	float:none;
- 	padding: 12px 0px;
+ 	padding: 3px 0px;
 }
 
  .nav-stacked>li>a {
@@ -5426,7 +5428,7 @@
 
  .hero-unit {
  	padding:60px;
- 	margin-bottom:30px;
+ 	margin-bottom:0px;
  	font-size:18px;
 	 font-weight:200;
 	 line-height:30px;
