@@ -68,8 +68,13 @@ Jams::Application.configure do
   # Add the fonts path
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
+  config.assets.paths << Rails.root.join('app', 'assets', 'images')
+
   # Precompile additional assets
   config.assets.precompile += %w( .svg .eot .woff .ttf )
+  config.assets.precompile += %w( .jpg .png .gif )
+
+  config.action_dispatch.x_sendfile_header = nil # For Heroku
 
   # In production, :host should be set to the actual host of your application.
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
