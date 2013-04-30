@@ -72,7 +72,8 @@ Jams::Application.configure do
 
   # Precompile additional assets
   config.assets.precompile += %w( .svg .eot .woff .ttf )
-  config.assets.precompile += %w( .jpg .png .gif )
+  
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
   config.action_dispatch.x_sendfile_header = nil # For Heroku
 

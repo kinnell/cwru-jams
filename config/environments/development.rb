@@ -37,9 +37,13 @@ Jams::Application.configure do
 
   # Add the fonts path
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  config.assets.paths << Rails.root.join('app', 'assets', 'images')
 
   # Precompile additional assets
   config.assets.precompile += %w( .svg .eot .woff .ttf )
+  
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
   
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
