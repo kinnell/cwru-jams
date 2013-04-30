@@ -12,9 +12,9 @@
     <%= render 'layouts/menu' %>
 
 
-    <div id="content" class="span16">
+    <div id="content" class="span11" style="width: 86%; min-height: 560px; margin-bottom: 60px;">
 
-    <div class="container">
+    <div class="container" style="margin-left: 0%;">
             <% flash.each do |name, msg| %>
                 <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
             <% end %>

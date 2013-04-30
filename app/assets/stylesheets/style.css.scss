@@ -28,7 +28,7 @@
 }
 
 body {
-	background: #F5F5F5;
+	background: #EEE;
 	color: #3b3b41;
 	border: none;
 	font-family: 'Open Sans', sans-serif;
@@ -129,7 +129,8 @@ h6 {
 	-webkit-border-radius: 0px 5px 5px 5px;
        -moz-border-radius: 0px 5px 5px 5px;
           	border-radius: 0px 5px 5px 5px;
-	border: 2px solid #eee;
+
+          	
 	position: relative;
 }
 
@@ -412,6 +413,7 @@ h6 {
 a.brand span {
 	color: #fff;
 	text-shadow: none;
+
 }
 
 .header-nav {
@@ -499,7 +501,8 @@ a.brand span {
   	-webkit-border-radius: 0px;
        -moz-border-radius: 0px;
           	border-radius: 0px;
-	text-decoration: none;		
+	text-decoration: none;
+
 }
 
 .nav-tabs.nav-stacked > li > ul > li {
@@ -570,6 +573,7 @@ a.brand span {
           	border-radius: 5px 0px 0px 5px !important;
 	position: relative;
 	z-index: 20;
+
 }
 
 .nav-tabs.nav-stacked  > li.active > ul {
@@ -2902,7 +2906,7 @@ footer {
  bottom: 0;
  width: 100%;
  margin: 0px 0px 0px 0px;
- z-index: 2;
+ z-index: 100;
 
 }
 
