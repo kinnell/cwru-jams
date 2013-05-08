@@ -1,0 +1,410 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'time'
+
+require 'iron_worker_ng'
+require 'iron_worker_ng/cli'
+
+class IronWorkerCLILoggerFormatter < ::Logger::Formatter
+  def call(severity, time, proname, msg)
+    msg = IronWorkerNG::CLI::LOG_ENTRY + msg unless msg.start_with?(IronWorkerNG::CLI::LOG_GROUP)
+
+    msg + "\n"
+  end
+end
+
+IronCore::Logger.logger.formatter = IronWorkerCLILoggerFormatter.new
+
+@cli = IronWorkerNG::CLI.new
+
+def common_opts(opts)
+  opts.on('--config CONFIG', 'config file') do |v|
+    @cli.config = v
+  end
+
+  opts.on('-e', '--env ENV', 'environment') do |v|
+    @cli.env = v
+  end
+
+  opts.on('--project-id PROJECT_ID', 'project id') do |v|
+    @cli.project_id = v
+  end
+end
+
+if $*.size == 1 && ($*[0] == '-v' || $*[0] == '--version')
+  puts IronWorkerNG.full_version
+  exit 0
+end
+
+commands = ['upload', 'queue', 'retry', 'schedule', 'log', 'run', 'install', 'webhook', 'info']
+
+if $*.size == 0 || (not commands.include?($*[0]))
+  puts 'usage: iron_worker COMMAND [OPTIONS]'
+  puts "    COMMAND: #{commands.join(', ')}"
+  puts '    run iron_worker COMMAND --help to get more information about each command'
+  exit 1
+end
+
+command = $*.shift
+
+if $*.include?('--debug')
+  IronCore::Logger.logger.level = ::Logger::DEBUG
+
+  $*.reject! { |p| p == '--debug' }
+end
+
+if command == 'upload'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = "usage: iron_worker upload CODE_PACKAGE_NAME_OR_PATH_TO_WORKERFILE [OPTIONS]"
+
+    opts.on('-n', '--name NAME', 'override code name') do |v|
+      params[:name] = v
+    end
+
+    opts.on('-c', '--max-concurrency CONCURRENCY', Integer, 'max number of concurrent workers for this code package') do |v|
+      options[:max_concurrency] = v
+    end
+
+    opts.on('-r', '--retries NUM_RETRIES', Integer, 'max number of automatic retries on task fail') do |v|
+      options[:retries] = v
+    end
+
+    opts.on('-d', '--retries-delay RETRIES_DELAY', Integer, 'delay between each automatic retry') do |v|
+      options[:retries_delay] = v
+    end
+
+    opts.on('--worker-config CONFIG_FILE', 'config file for worker') do |v|
+      options[:worker_config] = v
+    end
+
+    opts.on('-h', '--host HOST', String, 'host name, eg: www.mydomain.com') do |v|
+      options[:host] = v
+    end
+
+    opts.on('-a', '--async', 'don\'t wait for package build') do |v|
+      params[:async] = true
+    end
+
+    opts.on('--full-remote-build', 'activate full remote build') do |v|
+      params[:full_remote_build] = true
+    end
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify code package name or path to workerfile'
+    puts opts
+    exit 1
+  end
+
+  @cli.upload($*[0], params, options)
+elsif command == 'queue' || command == 'schedule'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = "usage: iron_worker #{command} CODE_PACKAGE_NAME [OPTIONS]"
+
+    opts.on('-p', '--payload PAYLOAD', String, 'payload to pass') do |v|
+      params[:payload] = v
+    end
+
+    opts.on('-f', '--payload-file PAYLOAD_FILE', String, 'payload file to pass') do |v|
+      params[:payload] = File.read(v)
+    end
+
+    opts.on('--priority PRIORITY', Integer, '0 (default), 1, 2') do |v|
+      options[:priority] = v
+    end
+
+    opts.on('--timeout TIMEOUT', Integer, 'maximum run time in seconds from 0 to 3600 (default)') do |v|
+      options[:timeout] = v
+    end
+
+    opts.on('--delay DELAY', Integer, 'delay before start in seconds') do |v|
+      options[:delay] = v
+    end
+
+    if command == 'queue'
+      opts.on('--wait', Integer, 'wait for task to complete and print log') do |v|
+        options[:wait] = true
+      end
+    end
+
+    if command == 'schedule'
+      opts.on('--start-at TIME', 'start task at specified time') do |v|
+        options[:start_at] = Time.parse(v)
+      end
+
+      opts.on('--end-at TIME', 'stop running task at specified time') do |v|
+        options[:end_at] = Time.parse(v)
+      end
+
+      opts.on('--run-times RUN_TIMES', Integer, 'run task no more times than specified') do |v|
+        options[:run_times] = v
+      end
+
+      opts.on('--run-every RUN_EVERY', Integer, 'run task every RUN_EVERY seconds') do |v|
+        options[:run_every] = v
+      end
+    end
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify code package name'
+    puts opts
+    exit 1
+  end
+
+  if command == 'queue'
+    @cli.queue($*[0], params, options)
+  else
+    @cli.schedule($*[0], params, options)
+  end
+elsif command == 'retry'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = "usage: iron_worker retry TASK_ID [OPTIONS]"
+
+    opts.on('--delay DELAY', Integer, 'delay before start in seconds') do |v|
+      options[:delay] = v
+    end
+
+    opts.on('--wait', Integer, 'wait for task to complete and print log') do |v|
+      options[:wait] = true
+    end
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify task id'
+    puts opts
+    exit 1
+  end
+
+  @cli.retry($*[0], params, options)
+elsif command == 'log'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = "usage: iron_worker log TASK_ID [OPTIONS]"
+
+    opts.on('-w', '--wait', 'wait for task to complete') do |v|
+      options[:wait] = true
+    end
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify task id'
+    puts opts
+    exit 1
+  end
+
+  @cli.getlog($*[0], params, options)
+elsif command == 'run'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = "usage: iron_worker run CODE_PACKAGE_NAME_OR_PATH_TO_WORKERFILE [OPTIONS]"
+
+    opts.on('-p', '--payload PAYLOAD', String, 'payload to pass') do |v|
+      params[:payload] = v
+    end
+
+    opts.on('-f', '--payload-file PAYLOAD_FILE', String, 'payload file to pass') do |v|
+      params[:payload] = File.read(v)
+    end
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify code package name or workerfile'
+    puts opts
+    exit 1
+  end
+
+  @cli.run($*[0], params, options)
+elsif command == 'install'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = 'usage: iron_worker install CODE_PACKAGE_NAME_OR_PATH_TO_WORKERFILE [OPTIONS]'
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify code package name or path to workerfile'
+    puts opts
+    exit 1
+  end
+
+  @cli.install($*[0], params, options)
+elsif command == 'webhook'
+  params = {}
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = 'usage: iron_worker webhook CODE_PACKAGE_NAME [OPTIONS]'
+
+    common_opts(opts)
+  end
+
+  begin
+    opts.parse!
+  rescue OptionParser::ParseError
+    puts $!.to_s
+    exit 1
+  end
+
+  unless $*.size == 1
+    puts 'Please specify code package name'
+    puts opts
+    exit 1
+  end
+
+  @cli.webhook($*[0], params, options)
+elsif command == 'info'
+  entities = ['code', 'task', 'schedule']
+
+  if $*.size == 0 || (not entities.include?($*[0]))
+    puts 'usage: iron_worker info ENTITY [OPTIONS]'
+    puts "    ENTITY: #{entities.join(', ')}"
+    puts '    run iron_worker info ENTITY --help to get more information about each entity'
+    exit 1
+  end
+
+  entity = $*.shift
+
+  if entity == 'code'
+    params = {}
+    options = {}
+
+    opts = OptionParser.new do |opts|
+      opts.banner = "usage: iron_worker info code CODE_PACAKGE_NAME [OPTIONS]"
+
+      common_opts(opts)
+    end
+
+    begin
+      opts.parse!
+    rescue OptionParser::ParseError
+      puts $!.to_s
+      exit 1
+    end
+
+    unless $*.size == 1
+      puts 'Please specify code package name'
+      puts opts
+      exit 1
+    end
+
+    @cli.info_code($*[0], params, options)
+  elsif entity == 'task'
+    params = {}
+    options = {}
+
+    opts = OptionParser.new do |opts|
+      opts.banner = "usage: iron_worker info task TASK_ID [OPTIONS]"
+
+      common_opts(opts)
+    end
+
+    begin
+      opts.parse!
+    rescue OptionParser::ParseError
+      puts $!.to_s
+      exit 1
+    end
+
+    unless $*.size == 1
+      puts 'Please specify task id'
+      puts opts
+      exit 1
+    end
+
+    @cli.info_task($*[0], params, options)
+  elsif entity == 'schedule'
+    params = {}
+    options = {}
+
+    opts = OptionParser.new do |opts|
+      opts.banner = "usage: iron_worker info schedule SCHEDULE_ID [OPTIONS]"
+
+      common_opts(opts)
+    end
+
+    begin
+      opts.parse!
+    rescue OptionParser::ParseError
+      puts $!.to_s
+      exit 1
+    end
+
+    unless $*.size == 1
+      puts 'Please specify schedule id'
+      puts opts
+      exit 1
+    end
+
+    @cli.info_schedule($*[0], params, options)
+  end
+end

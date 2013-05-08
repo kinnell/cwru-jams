@@ -50,6 +50,12 @@ GEM
       multi_json (~> 1.0)
     hike (1.2.2)
     i18n (0.6.1)
+    iron_core (0.6.1)
+      rest (>= 2.2.0)
+    iron_worker_ng (0.16.4)
+      bundler (>= 1.2.0)
+      iron_core (>= 0.5.1)
+      rubyzip (>= 0.9.9)
     journey (1.0.4)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
@@ -89,6 +95,11 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    rest (2.6.0)
+      rest-client (>= 0.3.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    rubyzip (0.9.9)
     sass (3.2.8)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -122,6 +133,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.1.0)
   coffee-rails (~> 3.2.1)
   devise
+  iron_worker_ng
   jquery-rails (>= 1.0.12)
   pg
   rails (= 3.2.13)

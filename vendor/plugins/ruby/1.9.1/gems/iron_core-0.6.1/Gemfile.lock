@@ -1,0 +1,26 @@
+PATH
+  remote: .
+  specs:
+    iron_core (0.6.0)
+      rest (>= 2.2.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    mime-types (1.22)
+    minitest (4.7.1)
+    rake (10.0.4)
+    rest (2.6.0)
+      rest-client (>= 0.3.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    test-unit (2.5.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  iron_core!
+  minitest
+  rake
+  test-unit

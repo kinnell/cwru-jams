@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'devise'
 gem 'simple_form'
+gem 'iron_worker_ng'
 
 group :production do
 	gem 'pg'
