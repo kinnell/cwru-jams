@@ -3,13 +3,17 @@ Jams::Application.routes.draw do
   resources :facilities
 
 
-  resources :alarms
-
+  
 
   resources :devices
 
 
   resources :residents
+
+  resources :alarms
+
+
+
 
 
   devise_for :users

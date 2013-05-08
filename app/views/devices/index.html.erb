@@ -6,35 +6,47 @@
         <tr>
             <th>Device ID</th>
             <th>Resident</th>
-            <th><center>Device Status</center></th>
+            <th><center>Alarm Status</center></th>
             <th><center>Options</center></th>
         </tr>
       </thead>   
       <tbody>
         <% @devices.each do |device| %>
             <tr>
-               <td><%= link_to device.id, device %></td>
+               <td><%= device.id %></td>
                <td>
                   <% if device.resident_id %>
                       <% if Resident.exists?(device.resident_id) %>
-                          <%= Resident.find(device.resident_id).name %>
+                          <%= link_to Resident.find(device.resident_id).name, resident_path(device.resident_id) %>
                       <% end %>
                   <% end %>
 
                </td>
                <td style="text-align: center;">
-                  <% if device.status==true %>
-                      <span class="label label-success">Online</span>
-                  <% elsif device.status==false %>
-                      <span class="label label-offline">Offline</span
-                  <% end %>     
+
+              <% if device.status==true %>
+
+                      <%= simple_form_for(device, html: { :class => "form-nomargin"}) do |f| %>
+                      <%= f.hidden_field :status, as: :boolean, :value=>"false" %>
+                      <%= f.submit "Alarm On", class: "btn btn-mini btn-danger" %>
+                      <% end %>
+
+                   <% elsif device.status==false %>
+
+                      <%= simple_form_for(device, html: { :class => "form-nomargin"}) do |f| %>
+                      <%= f.hidden_field :status, as: :boolean, :value=>"true" %>
+                      <%= f.submit "Alarm Off", class: "btn btn-mini btn-info" %>
+                      <% end %>
+
+                <% end %>
+  
 
 
 
                </td>
                <td style="text-align: center;">
                   <%= link_to(edit_device_path(device)) do %><i class="halflings-icon black pencil"></i><% end %>
-                  <%= link_to(device, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
+                  <%= link_to(device, method: :delete) do %><i class="halflings-icon black trash"></i><% end %>
             </tr>
         <% end %>
                                    

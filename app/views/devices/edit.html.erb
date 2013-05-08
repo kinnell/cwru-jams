@@ -5,9 +5,7 @@
 
   <div class="form-actions">
   	  <%= f.input :id, disabled: true, :label => "Device ID" %>
-
   	  <%= f.input :resident_id, as: :select, :collection => Resident.all %>
-  	  <%= f.input :status, as: :boolean, :label => "Activate?" %>
   </div>
 
   <div class="form-actions">

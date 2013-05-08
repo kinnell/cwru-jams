@@ -26,7 +26,7 @@
               </td>
               <td style="text-align: center;">
                   <%= link_to(edit_resident_path(resident)) do %><i class="halflings-icon black pencil"></i><% end %>
-                  <%= link_to(resident, method: :delete, data: { confirm: 'Are you sure? Deleting a Resident will delete their alarms as well!' }) do %><i class="halflings-icon black trash"></i><% end %>
+                  <%= link_to(resident, method: :delete) do %><i class="halflings-icon black trash"></i><% end %>
               </td>
             </tr>
         <% end %>

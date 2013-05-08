@@ -9,7 +9,7 @@
  	 <%= f.input :time, as: :time, :minute_step => 15, :ampm => true %>
  	 <%= f.input :recurring, as: :radio_buttons, collection: ["Daily"] %>
  	 <%= f.input :priority, as: :radio_buttons, collection: ["Normal", "High"], :selected => "Normal" %>
-  	 <%= f.input :status, as: :boolean, :label => "Activate?" %>
+  	 <%= f.hidden_field :status, as: :boolean, :value => "false" %>
   </div>
 
   <div class="form-actions">

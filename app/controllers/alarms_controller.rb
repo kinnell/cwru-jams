@@ -2,6 +2,7 @@ class AlarmsController < ApplicationController
   # GET /alarms
   # GET /alarms.json
   def index
+
     @alarms = Alarm.all
 
     respond_to do |format|

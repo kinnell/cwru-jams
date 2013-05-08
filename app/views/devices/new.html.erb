@@ -5,7 +5,7 @@
 
   <div class="form-actions">
   	  <%= f.input :resident_id, as: :select, :collection => Resident.all %>
-  	  <%= f.input :status, as: :boolean, :label => "Activate?" %>
+  	  <%= f.hidden_field :status, as: :boolean, :value => "false" %>
   </div>
 
   <div class="form-actions">

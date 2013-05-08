@@ -1,2 +1,4 @@
-<%= link_to 'Edit', edit_alarm_path(@alarm) %> |
-<%= link_to 'Back', alarms_path %>
+<div class="form-actions">
+<%= link_to 'Back', alarms_path, class: "btn" %>
+<%= link_to 'Edit', edit_alarm_path(@alarm), class: "btn btn-success" %>
+</div>

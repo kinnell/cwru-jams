@@ -15,11 +15,9 @@
         <tr>
             <th>Alarm ID</th>
             <th>Medication</th>
-            <th>Resident Name</th>
             <th><center>Time</center></th>
             <th><center>Recurring</center></th>
             <th><center>Priority</center></th>
-            <th><center>Device Status</center></th>
             <th><center>Options</center></th>
         </tr>
       </thead>   
@@ -32,7 +30,6 @@
 
               <td><%= link_to alarm.id, alarm %></td>
               <td><%= alarm.medication %></td>
-              <td><%= Resident.find(alarm.resident_id).name %></td>
               <td style="text-align: center;"><%= alarm.time.strftime("%l:%M %p %Z")    %></td>
               <td style="text-align: center;"><%= alarm.recurring %></td>
               <td style="text-align: center;">
@@ -44,16 +41,10 @@
 
 
               </td>
-               <td style="text-align: center;">
-                  <% if alarm.status==true %>
-                      <span class="label label-success">Online</span>
-                  <% elsif alarm.status==false %>
-                      <span class="label label-offline">Offline</span
-                  <% end %>  
-              </td>
+               
                <td style="text-align: center;">
                   <%= link_to(edit_alarm_path(alarm)) do %><i class="halflings-icon black pencil"></i><% end %>
-                  <%= link_to(alarm, method: :delete, data: { confirm: 'Are you sure?' }) do %><i class="halflings-icon black trash"></i><% end %>
+                  <%= link_to(alarm, method: :delete) do %><i class="halflings-icon black trash"></i><% end %>
               
             </tr>
             <% end %>
@@ -65,6 +56,11 @@
 
 
 
+
+
 </p>
-<%= link_to 'Edit', edit_resident_path(@resident) %> |
-<%= link_to 'Back', residents_path %>
+
+<div class="form-actions">
+<%= link_to 'Back', residents_path, class: "btn" %>
+<%= link_to 'Edit', edit_resident_path(@resident), class: "btn btn-success" %>
+</div>
