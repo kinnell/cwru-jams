@@ -1,4 +1,10 @@
-ALARM: 43<br>
+<% if (@device.status == true) %>
+
+ALARM: <br>
+
+<% end %>
+
+
 
 <%= link_to 'Edit', edit_device_path(@device) %> |
 <%= link_to 'Back', devices_path %>
