@@ -1,4 +1,7 @@
-<h1><%= @resident.name %></h1>
+<h1><%= @resident.name %>
+
+<div style="float:right;"><%= link_to edit_resident_path(@resident) do %><i class='fa-icon-pencil btn'></i><% end %></div>
+</h1>
 
 <hr>
 
@@ -115,8 +118,3 @@
   </table>
 
 </p>
-
-<div class="form-actions">
-<%= link_to 'Back', residents_path, class: "btn" %>
-<%= link_to 'Edit', edit_resident_path(@resident), class: "btn btn-success" %>
-</div>

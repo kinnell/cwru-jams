@@ -67,7 +67,7 @@ class ResidentsController < ApplicationController
 
     respond_to do |format|
       if @resident.update_attributes(params[:resident])
-        format.html { redirect_to residents_url, notice: 'Resident was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Resident was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

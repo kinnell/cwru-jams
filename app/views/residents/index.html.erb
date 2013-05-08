@@ -7,7 +7,7 @@
         <tr>
             <th>Resident Name</th>
             <th><center>Room</center></th>  
-            <th><center>Resident Status</center></th>                
+            <th><center>Device Status</center></th>                
             <th><center>Options</center></th>
         </tr>
       </thead>   
@@ -16,11 +16,14 @@
             <tr>
               <td><%= link_to resident.name, resident %></td>
               <td><center><%= resident.room %></center></td>
+
               <td style="text-align: center;">
-                  <% if resident.status==true %>
+
+
+                  <% if Device.exists?(:resident_id => resident.id) %>
                       <span class="label label-success">Online</span>
-                  <% elsif resident.status==false %>
-                      <span class="label label-offline">Offline</span
+                  <% else %>
+                      <span class="label label-warning">No Device</span
                   <% end %>  
 
               </td>
