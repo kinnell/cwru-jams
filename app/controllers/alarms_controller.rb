@@ -4,6 +4,8 @@ class AlarmsController < ApplicationController
   def index
 
     @alarms = Alarm.all
+    session[:return_to] = request.referer
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +17,8 @@ class AlarmsController < ApplicationController
   # GET /alarms/1.json
   def show
     @alarm = Alarm.find(params[:id])
+    session[:return_to] = request.referer
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +30,7 @@ class AlarmsController < ApplicationController
   # GET /alarms/new.json
   def new
     @alarm = Alarm.new
+    session[:return_to] = request.referer
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +41,7 @@ class AlarmsController < ApplicationController
   # GET /alarms/1/edit
   def edit
     @alarm = Alarm.find(params[:id])
+    session[:return_to] = request.referer
   end
 
   # POST /alarms
@@ -45,7 +51,7 @@ class AlarmsController < ApplicationController
 
     respond_to do |format|
       if @alarm.save
-        format.html { redirect_to alarms_url, notice: 'Alarm was successfully created.' }
+        format.html { redirect_to session[:return_to], notice: 'Alarm was successfully created.' }
         format.json { render json: @alarm, status: :created, location: @alarm }
       else
         format.html { render action: "new" }
@@ -61,7 +67,7 @@ class AlarmsController < ApplicationController
 
     respond_to do |format|
       if @alarm.update_attributes(params[:alarm])
-        format.html { redirect_to alarms_url, notice: 'Alarm was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Alarm was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

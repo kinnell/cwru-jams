@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501154225) do
+ActiveRecord::Schema.define(:version => 20130508210931) do
 
   create_table "alarms", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130501154225) do
     t.string   "priority"
     t.datetime "time"
     t.string   "recurring"
+    t.string   "period"
   end
 
   add_index "alarms", ["resident_id"], :name => "index_alarms_on_resident_id"

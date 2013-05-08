@@ -3,6 +3,8 @@ class ResidentsController < ApplicationController
   # GET /residents.json
   def index
     @residents = Resident.all
+    session[:return_to] = request.referer
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +16,7 @@ class ResidentsController < ApplicationController
   # GET /residents/1.json
   def show
     @resident = Resident.find(params[:id])
+    session[:return_to] = request.referer
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +28,8 @@ class ResidentsController < ApplicationController
   # GET /residents/new.json
   def new
     @resident = Resident.new
+    session[:return_to] = request.referer
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +40,8 @@ class ResidentsController < ApplicationController
   # GET /residents/1/edit
   def edit
     @resident = Resident.find(params[:id])
+    session[:return_to] = request.referer
+
   end
 
   # POST /residents
@@ -44,7 +51,7 @@ class ResidentsController < ApplicationController
 
     respond_to do |format|
       if @resident.save
-        format.html { redirect_to residents_url, notice: 'Resident was successfully created.' }
+        format.html { redirect_to @resident, notice: 'Resident was successfully created.' }
         format.json { render json: @resident, status: :created, location: @resident }
       else
         format.html { render action: "new" }

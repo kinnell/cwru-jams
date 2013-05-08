@@ -7,10 +7,10 @@
   	  <%= f.input :id, disabled: true, :label => "Alarm ID" %>
  	 <%= f.input :medication %>
  	 <%= f.input :resident_id, as: :select, :collection => Resident.all %>
+   <%= f.input :period, as: :select, collection: ["Morning", "Afternoon", "Evening"] %>
  	 <%= f.input :time, as: :time, :minute_step => 15, :ampm => true %>
  	 <%= f.input :recurring, as: :radio_buttons, collection: ["Daily"] %>
- 	 <%= f.input :priority, as: :radio_buttons, collection: ["Normal", "High"], :selected => "Normal" %>
-  	 <%= f.input :status, as: :boolean, :label => "Activate?" %>
+ 	 <%= f.input :priority, as: :radio_buttons, collection: ["Normal", "High"] %>
   </div>
 
   <div class="form-actions">

@@ -6,9 +6,10 @@
   <div class="form-actions">
  	 <%= f.input :medication %>
  	 <%= f.input :resident_id, as: :select, :collection => Resident.all %>
+     <%= f.input :period, as: :select, collection: ["Morning", "Afternoon", "Evening"] %>
  	 <%= f.input :time, as: :time, :minute_step => 15, :ampm => true %>
- 	 <%= f.input :recurring, as: :radio_buttons, collection: ["Daily"] %>
- 	 <%= f.input :priority, as: :radio_buttons, collection: ["Normal", "High"], :selected => "Normal" %>
+ 	 <%= f.input :recurring, as: :radio_buttons, collection: ["Daily"], :checked => "Daily" %>
+ 	 <%= f.input :priority, as: :radio_buttons, collection: ["Normal", "High"], :checked => "Normal" %>
   	 <%= f.hidden_field :status, as: :boolean, :value => "false" %>
   </div>
 

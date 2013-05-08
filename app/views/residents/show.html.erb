@@ -1,20 +1,79 @@
+<h1><%= @resident.name %></h1>
+
+<hr>
+
+<h1 style="font-size: 24px;"><i class="fa-icon-hdd" style="color: #AAA;">  Device Management</i>
+<div style="float:right;"><%= link_to 'New Device', new_device_path, class: "btn btn-mini" %></div>
+</h1>
+
+
 <p>
-  <b>Name:</b>
-  <%= @resident.name %>
+
+ <table class="table table-bordered table-striped table-condensed" style="width:100%;left:20px;">
+      <thead>
+        <tr>
+            <th>Device ID</th>
+            <th><center>Alarm Status</center></th>
+            <th><center>Options</center></th>
+        </tr>
+      </thead>   
+      <tbody>
+
+        <% Device.find_each do |device| %>
+          <% if @resident.id==device.resident_id %>
+
+            <tr>
+               <td><%= device.id %></td>
+               <td style="text-align: center;">
+
+              <% if device.status==true %>
+
+                      <%= simple_form_for(device, html: { :class => "form-nomargin"}) do |f| %>
+                      <%= f.hidden_field :status, as: :boolean, :value=>"false" %>
+                      <%= f.submit "Alarm On", class: "btn btn-mini btn-danger" %>
+                      <% end %>
+
+                   <% elsif device.status==false %>
+
+                      <%= simple_form_for(device, html: { :class => "form-nomargin"}) do |f| %>
+                      <%= f.hidden_field :status, as: :boolean, :value=>"true" %>
+                      <%= f.submit "Alarm Off", class: "btn btn-mini btn-info" %>
+                      <% end %>
+
+                <% end %>
+  
+
+
+
+               </td>
+               <td style="text-align: center;">
+                  <%= link_to(edit_device_path(device)) do %><i class="halflings-icon black pencil"></i><% end %>
+                  <%= link_to(device, method: :delete) do %><i class="halflings-icon black trash"></i><% end %>
+            </tr>
+        <% end %>
+        <% end %>
+                                   
+      </tbody>
+  </table>
 </p>
 
+        
+
+<h1 style="font-size: 24px;"><i class="fa-icon-bell" style="color: #AAA;">   Alarm Management</i>
+  <div style="float:right;"><%= link_to 'New Alarm', new_alarm_path, class: "btn btn-mini" %></div>
+</h1>
+
+
+
+
 <p>
-	<b>Device: </b>
 
-</p>
-
-<p>
-
-	<table class="table table-bordered table-striped table-condensed" style="width:90%;left:20px;">
+	<table class="table table-bordered table-striped table-condensed" style="width:100%;left:20px;">
       <thead>
         <tr>
             <th>Alarm ID</th>
             <th>Medication</th>
+            <th><center>Time Period</center></th>
             <th><center>Time</center></th>
             <th><center>Recurring</center></th>
             <th><center>Priority</center></th>
@@ -28,8 +87,9 @@
       		<% if @resident.id==alarm.resident_id %>
             <tr>
 
-              <td><%= link_to alarm.id, alarm %></td>
+              <td><%= link_to alarm.id, edit_alarm_path(alarm) %></td>
               <td><%= alarm.medication %></td>
+              <td style="text-align: center;"><%= alarm.period %></td>
               <td style="text-align: center;"><%= alarm.time.strftime("%l:%M %p %Z")    %></td>
               <td style="text-align: center;"><%= alarm.recurring %></td>
               <td style="text-align: center;">
@@ -53,10 +113,6 @@
                                    
       </tbody>
   </table>
-
-
-
-
 
 </p>
 

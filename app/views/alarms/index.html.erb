@@ -7,6 +7,7 @@
             <th>Alarm ID</th>
             <th>Resident Name</th>
             <th>Medication</th>
+            <th><center>Time Period</center></th>
             <th><center>Time</center></th>
             <th><center>Recurring</center></th>
             <th><center>Priority</center></th>
@@ -16,9 +17,10 @@
       <tbody>
         <% @alarms.each do |alarm| %>
             <tr>
-              <td><%= link_to alarm.id, alarm %></td>
+              <td><%= link_to alarm.id, edit_alarm_path(alarm) %></td>
               <td><%= link_to Resident.find(alarm.resident_id).name, resident_path(alarm.resident_id) %></td>
               <td><%= alarm.medication %></td>
+              <td style="text-align: center;"><%= alarm.period %></td>
               <td style="text-align: center;"><%= alarm.time.strftime("%l:%M %p %Z")    %></td>
               <td style="text-align: center;"><%= alarm.recurring %></td>
               <td style="text-align: center;">
