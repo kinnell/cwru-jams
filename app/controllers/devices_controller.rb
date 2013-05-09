@@ -66,7 +66,7 @@ class DevicesController < ApplicationController
 
     respond_to do |format|
       if @device.update_attributes(params[:device])
-        format.html { redirect_to session[:return_to], notice: 'Device was successfully updated.' }
+        format.html { redirect_to devices_url, notice: 'Device was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

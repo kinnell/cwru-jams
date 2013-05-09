@@ -1,4 +1,6 @@
 
+
+<% if user_signed_in? %>
 <h1>Dashboard</h1>
  
 				
@@ -25,4 +27,19 @@
 					</div>
 					
 				</div>
+<% else %>
+
+<h1>What is JAMS?</h1>
+JAMS stands for Judson Automatic Medication System. It is a solution for the residents at Judson Manor for medication compliance.
+<br><br><br>
+<h1>How does JAMS work?</h1>
+The central component of JAMS is a state of the art pill box that can detect when medication is taken or medication has yet to be taken and a notifier that effectively alerts residents when it is time to take their medication. With this JAMS User Interface, you can set up alarms for when specific medication needs to be taken by specific residents which can only be deactivated when residents take their medication from the pill box.
+<br><br><br>
+<h1>How do I start?</h1>
+JAMS UI is currently in beta, but you can create an account and test out our current functionalities in creating and managing residents, devices and alarms.
+<br>
+
+
+
+<% end %>
 
