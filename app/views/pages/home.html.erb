@@ -4,29 +4,58 @@
 <h1>Dashboard</h1>
  
 				
-				<div class="box span4" onTablet="span6" onDesktop="span4">
+					<div class="box span6" onTablet="span8" onDesktop="span6" style="margin-right: 20px">
 					<div class="box-header">
-						<h2><i class="halflings-icon user"></i><span class="break"></span>Residents</h2>
+						<h2><i class="halflings-icon bell"></i><span class="break"></span>Upcoming Alarms</h2>
 						
+					</div>
+
+					<div class="box-content">
+
+					<ul class="dashboard-list">
+
+							<% Alarm.order("time").all.each do |alarm| %>
+
+
+							<li><a href="#"><b><%= alarm.time.strftime("%l:%M %p") %></b>: 
+							<%= Resident.find(alarm.resident_id).name %> (<%= alarm.medication %>)</a></li>
+
+							<% end %>
+
+						</ul>
+					</div>
+					
+				</div><!--/span-->
+
+
+
+				<div class="box span4" onTablet="span6" onDesktop="span4" style="margin-right: 20px">
+					<div class="box-header">
+						<h2><i class="halflings-icon tasks"></i><span class="break"></span>Statistics</h2>
+						
+					</div>
+
+					<div class="box-content">
+
+					<ul class="dashboard-list">
+							<li><a href="#">
+							<i class="halflings-icon user"></i>              
+							<span class="green"><%= Resident.count %></span>Residents</a></li>
+
+							<li><a href="#">
+							<i class="halflings-icon bell"></i>              
+							<span class="green"><%= Alarm.count %></span>Alarms</a></li>
+
+							<li><a href="#">
+							<i class="halflings-icon hdd"></i>              
+							<span class="green"><%= Device.count %></span>Devices</a></li>
+						</ul>
 					</div>
 					
 				</div><!--/span-->
 				
-				<div class="box span4" onTablet="span6" onDesktop="span4">
-					<div class="box-header">
-						<h2><i class="halflings-icon bell"></i><span class="break"></span>Alarms</h2>
-						
-					</div>
-					
-				</div><!--/span-->
 				
-				<div class="box span4 noMargin" onTablet="span12" onDesktop="span4">
-					<div class="box-header">
-						<h2><i class="halflings-icon hdd"></i><span class="break"></span>Devices</h2>
-						
-					</div>
-					
-				</div>
+				
 <% else %>
 
 <h1>What is JAMS?</h1>
